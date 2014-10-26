@@ -22,7 +22,7 @@ function varargout = create_mesh_simple(varargin)
 
 % Edit the above text to modify the response to help create_mesh_simple
 
-% Last Modified by GUIDE v2.5 19-Oct-2014 23:27:28
+% Last Modified by GUIDE v2.5 25-Oct-2014 20:35:55
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,9 +82,8 @@ function create_mesh_Callback(hObject, eventdata, handles)
 %create_mesh_simple('String', 'You chose to create a mesh')
 %guide(create_mesh_option1.fig)
 
+close(create_mesh_simple);
 hObject = create_mesh_option1;
-close(gcf);
-
 
 % --- Executes on button press in change_mesh_type.
 function change_mesh_type_Callback(hObject, eventdata, handles)
@@ -112,3 +111,13 @@ function export_mesh_Callback(hObject, eventdata, handles)
 % hObject    handle to export_mesh (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in previous_pb.
+function previous_pb_Callback(hObject, eventdata, handles)
+% hObject    handle to previous_pb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+hObject = menu_new;
+close(create_mesh_simple);

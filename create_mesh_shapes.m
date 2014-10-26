@@ -22,7 +22,7 @@ function varargout = create_mesh_shapes(varargin)
 
 % Edit the above text to modify the response to help create_mesh_shapes
 
-% Last Modified by GUIDE v2.5 20-Oct-2014 23:17:59
+% Last Modified by GUIDE v2.5 25-Oct-2014 22:24:56
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -143,3 +143,12 @@ function bem_flourescence_pb_Callback(hObject, eventdata, handles)
 
 hObject = gui_create_mesh;
 
+
+% --- Executes on button press in previous_pb.
+function previous_pb_Callback(hObject, eventdata, handles)
+% hObject    handle to previous_pb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(gcf);
+hObject = create_mesh_option1;

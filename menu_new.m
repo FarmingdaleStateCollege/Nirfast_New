@@ -86,8 +86,10 @@ function mesh_pb_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% launch the create_mesh_simple GUI
+%launch the create_mesh_simple GUI
 hObject = create_mesh_simple;
+%close the current figure
+close(menu_new);
 
 % --- Executes on button press in forward_solver.
 function forward_solver_Callback(hObject, eventdata, handles)

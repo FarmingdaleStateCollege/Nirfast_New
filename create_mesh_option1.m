@@ -22,7 +22,7 @@ function varargout = create_mesh_option1(varargin)
 
 % Edit the above text to modify the response to help create_mesh_option1
 
-% Last Modified by GUIDE v2.5 19-Oct-2014 22:48:23
+% Last Modified by GUIDE v2.5 25-Oct-2014 22:20:09
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -200,49 +200,6 @@ if isequal(get(hObject,'CurrentKey'),'return')
 end    
 
 
-% --- Executes on button press in simple_shapes.
-function simple_shapes_Callback(hObject, eventdata, handles)
-% hObject    handle to simple_shapes (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of simple_shapes
-
-% --- Executes on button press in from2dMask.
-function from2dMask_Callback(hObject, eventdata, handles)
-% hObject    handle to from2dMask (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of from2dMask
-
-
-% --- Executes on button press in from3dVolume.
-function from3dVolume_Callback(hObject, eventdata, handles)
-% hObject    handle to from3dVolume (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of from3dVolume
-
-
-% --- Executes on button press in from3dSurface.
-function from3dSurface_Callback(hObject, eventdata, handles)
-% hObject    handle to from3dSurface (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of from3dSurface
-
-
-% --- Executes on button press in from3dMask.
-function from3dMask_Callback(hObject, eventdata, handles)
-% hObject    handle to from3dMask (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of from3dMask
-
 % --- Executes on button press in next_pb.
 function next_pb_Callback(hObject, eventdata, handles)
 % hObject    handle to next_pb (see GCBO)
@@ -251,34 +208,47 @@ function next_pb_Callback(hObject, eventdata, handles)
 
 %Get the value of the radio button "From 3d Mask"
 
-mask_shapes = get(handles.simple_shapes, 'Value');
-mask_2d = get(handles.from2dMask, 'Value');
-mask_3d = get(handles.from3dMask, 'Value');
-surface_3d = get(handles.from3dSurface, 'Value');
-volume_3d = get(handles.from3dVolume, 'Value')
-
+mask_shapes = get(handles.simple_shapes_rb, 'Value');
+mask_2d = get(handles.from2dmask_rb, 'Value');
+mask_3d = get(handles.from3dmask_rb, 'Value');
+surface_3d = get(handles.from3dsurface_rb, 'Value');
+volume_3d = get(handles.from3dvolume_rb, 'Value');
 
 if (mask_shapes == 1)
     disp ('Simple Shapes selected')
-    hObject = create_mesh_shapes
+    close(gcf);
+    hObject = create_mesh_shapes;
 end
 
 if (mask_2d == 1)
     disp ('2d mask selected')
+    close(gcf);
     hObject = create_mesh_2dmask
 end
 
 if (mask_3d == 1)
     disp ('3d mask selected')
+    close(gcf);
     hObject = image2mesh_gui
 end
 
 if (surface_3d == 1)
     disp ('3d Surface selected')
+    close(gcf);
     hObject = create_mesh_3dsurface
 end
 
 if (volume_3d == 1)
     disp ('3d Volume selected')
+    close(gcf);
     hObject = create_mesh_3dvolume
 end
+
+% --- Executes on button press in previous_pb.
+function previous_pb_Callback(hObject, eventdata, handles)
+% hObject    handle to previous_pb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(gcf);
+hObject = create_mesh_simple;
