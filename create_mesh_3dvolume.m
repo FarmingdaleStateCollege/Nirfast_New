@@ -22,7 +22,7 @@ function varargout = create_mesh_3dvolume(varargin)
 
 % Edit the above text to modify the response to help create_mesh_3dvolume
 
-% Last Modified by GUIDE v2.5 25-Oct-2014 22:35:30
+% Last Modified by GUIDE v2.5 28-Oct-2014 00:38:44
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -81,7 +81,7 @@ function standard_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of standard_pb
 
-hObject = gui_create_mesh_3D_volume
+gui_create_mesh_3D_volume('type','stnd');
 
 % --- Executes on button press in flourescence_pb.
 function flourescence_pb_Callback(hObject, eventdata, handles)
@@ -91,7 +91,7 @@ function flourescence_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of flourescence_pb
 
-hObject = gui_create_mesh_3D_volume
+gui_create_mesh_3D_volume('type','fluor');
 
 % --- Executes on button press in spectral_pb.
 function spectral_pb_Callback(hObject, eventdata, handles)
@@ -101,7 +101,7 @@ function spectral_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of spectral_pb
 
-hObject = gui_create_mesh_3D_volume
+gui_create_mesh_3D_volume('type','spec');
 
 % --- Executes on button press in spn_pb.
 function spn_pb_Callback(hObject, eventdata, handles)
@@ -111,7 +111,7 @@ function spn_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of spn_pb
 
-hObject = gui_create_mesh_3D_volume
+gui_create_mesh_3D_volume('type','stnd_spn');
 
 % --- Executes on button press in bem_pb.
 function bem_pb_Callback(hObject, eventdata, handles)
@@ -147,4 +147,11 @@ function previous_pb_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 close(gcf);
-hObject = create_mesh_option1;
+create_mesh_option1;
+
+
+% --- Executes during object creation, after setting all properties.
+function q1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to q1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called

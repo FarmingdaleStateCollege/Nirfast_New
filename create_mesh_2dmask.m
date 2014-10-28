@@ -81,7 +81,8 @@ function standard_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of standard_pb
 
-hObject = gui_create_mesh_2D
+%From original nirfast menu
+gui_create_mesh_2D('type','stnd');
 
 % --- Executes on button press in flourescence_pb.
 function flourescence_pb_Callback(hObject, eventdata, handles)
@@ -91,7 +92,7 @@ function flourescence_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of flourescence_pb
 
-hObject = gui_create_mesh_2D
+gui_create_mesh_2D('type','fluor');
 
 % --- Executes on button press in spectral_pb.
 function spectral_pb_Callback(hObject, eventdata, handles)
@@ -101,7 +102,7 @@ function spectral_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of spectral_pb
 
-hObject = gui_create_mesh_2D
+gui_create_mesh_2D('type','spec');
 
 % --- Executes on button press in spn_pb.
 function spn_pb_Callback(hObject, eventdata, handles)
@@ -111,7 +112,7 @@ function spn_pb_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of spn_pb
 
-hObject = gui_create_mesh_2D
+gui_create_mesh_2D('type','stnd_spn');
 
 % --- Executes on button press in bem_pb.
 function bem_pb_Callback(hObject, eventdata, handles)
@@ -147,4 +148,4 @@ function previous_pb_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 close(gcf);
-hObject = create_mesh_option1;
+create_mesh_option1;

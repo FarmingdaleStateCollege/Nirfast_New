@@ -217,31 +217,31 @@ volume_3d = get(handles.from3dvolume_rb, 'Value');
 if (mask_shapes == 1)
     disp ('Simple Shapes selected')
     close(gcf);
-    hObject = create_mesh_shapes;
+    create_mesh_shapes;
 end
 
 if (mask_2d == 1)
     disp ('2d mask selected')
     close(gcf);
-    hObject = create_mesh_2dmask
+    create_mesh_2dmask
 end
 
 if (mask_3d == 1)
     disp ('3d mask selected')
     close(gcf);
-    hObject = image2mesh_gui
+    image2mesh_gui();
 end
 
 if (surface_3d == 1)
     disp ('3d Surface selected')
     close(gcf);
-    hObject = create_mesh_3dsurface
+    create_mesh_3dsurface
 end
 
 if (volume_3d == 1)
     disp ('3d Volume selected')
     close(gcf);
-    hObject = create_mesh_3dvolume
+    create_mesh_3dvolume
 end
 
 % --- Executes on button press in previous_pb.
@@ -251,4 +251,4 @@ function previous_pb_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 close(gcf);
-hObject = create_mesh_simple;
+create_mesh_simple;
