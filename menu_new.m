@@ -22,7 +22,7 @@ function varargout = menu_new(varargin)
 
 % Edit the above text to modify the response to help menu_new
 
-% Last Modified by GUIDE v2.5 19-Oct-2014 23:07:07
+% Last Modified by GUIDE v2.5 04-Nov-2014 15:41:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,6 +61,8 @@ guidata(hObject, handles);
 % UIWAIT makes menu_new wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%USE ALLL CODE HERE FOR CHECKING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%WORKSPACE!!!!%%%%%%%%%%%%%%
 
 % --- Outputs from this function are returned to the command line.
 function varargout = menu_new_OutputFcn(hObject, eventdata, handles) 
@@ -77,10 +79,20 @@ varargout{1} = handles.output;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %disp(handles.meshloc)
-structName = handles.meshloc;
-disp(structName);
+%structName = handles.meshloc;
+%disp(structName);
 %s = struct();
-%structCheck = isfield(struct, nodes);
+
+meshName = who;
+
+%if(mesh==0)
+    disp('Checking for mesh');
+%else
+    disp(who);
+%end
+
+
+%structCheck = isfield(handles.cylinder_stnd);
 
 %disp(structCheck);
 %if(structCheck == 1)
@@ -90,6 +102,7 @@ disp(structName);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% PROBLEM AREA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 % --- Executes on button press in file_pb.
 function file_pb_Callback(hObject, eventdata, handles)
@@ -163,6 +176,7 @@ function load_mesh_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+gui_load_mesh
 
 % --- Executes on button press in view_mesh.
 function view_mesh_Callback(hObject, eventdata, handles)
@@ -170,6 +184,7 @@ function view_mesh_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+gui_view_mesh
 
 % --- Executes on button press in save_mesh.
 function save_mesh_Callback(hObject, eventdata, handles)
@@ -177,6 +192,7 @@ function save_mesh_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+gui_save_mesh
 
 % --- Executes on button press in data_pb.
 function data_pb_Callback(hObject, eventdata, handles)
@@ -204,3 +220,15 @@ function save_data_Callback(hObject, eventdata, handles)
 % hObject    handle to save_data (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+    
+
+
+% --- Executes during object creation, after setting all properties.
+function forward_solver_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to forward_solver (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+%%%%%%%%%USE CODE FOR CHECKING WORKSPACE VARIABLESS%%%%%%%%%%%%%%%%%%%%

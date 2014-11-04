@@ -109,7 +109,6 @@ batch = get(mainGUIdata.batch_mode,'Value');
 
 meshloc = get(handles.mesh,'String');
 disp(meshloc);
-handles = guidata(handles.meshloc);
 content{end+1} = strcat(mygenvarname(meshloc),' = load_mesh(''',meshloc,''');');
 if ~batch
     evalin('base',content{end});
