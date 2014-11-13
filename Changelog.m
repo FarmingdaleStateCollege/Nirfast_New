@@ -14,3 +14,17 @@ Changelog
 - Coded Save Mesh pushbutton
 - Coded View Mesh pushbutton
 - Continued work on examining workspace to disable certain menu options
+
+11/12/2014
+
+- Coded the menu so that forward solver, and reconstruct are not enabled when 
+  a mesh is not loaded
+- Added menu option to see all mesh info
+- Added dialog to show mesh information just like the axis in the original nirfast
+- Coded mesh info window so that all mesh info is shown 
+- Coded gui_load_mesh so that new mesh info window is called when done is clicked
+- Coded file new, save, and open pushbuttons, still working on showing the info in 
+  the mesh info dialog
+- Coded view solution pushbutton
+- Coded load, view, and save data pushbuttons
+- Coded help pushbutton with web address

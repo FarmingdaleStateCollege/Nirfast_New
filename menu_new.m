@@ -22,7 +22,7 @@ function varargout = menu_new(varargin)
 
 % Edit the above text to modify the response to help menu_new
 
-% Last Modified by GUIDE v2.5 04-Nov-2014 15:41:16
+% Last Modified by GUIDE v2.5 12-Nov-2014 23:55:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,8 +61,28 @@ guidata(hObject, handles);
 % UIWAIT makes menu_new wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%USE ALLL CODE HERE FOR CHECKING
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%WORKSPACE!!!!%%%%%%%%%%%%%%
+% code taken from nirfast 8 and updated for nirfast 8.1
+% find workspace variables
+
+vars = evalin('base','whos;');
+varnames = {};
+[numVar,junk] = size(vars);
+nflag = 1;
+for i=1:1:numVar
+    flag = evalin('base',strcat('isfield(',vars(i).name,',''type'')'));
+    if flag
+        varnames{nflag} = vars(i).name;
+        nflag = nflag + 1;
+    end
+end
+if ~isempty(varnames)
+    disp(varnames);
+   %set(handles.variables_mesh,'String',varnames);
+    set(handles.forward_solver, 'enable','on');
+    set(handles.reconstruct_pb, 'enable','on'); 
+    set(handles.mesh_info_pb, 'enable', 'on');
+end
+
 
 % --- Outputs from this function are returned to the command line.
 function varargout = menu_new_OutputFcn(hObject, eventdata, handles) 
@@ -73,36 +93,6 @@ function varargout = menu_new_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% PROBLEM AREA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%disp(handles.meshloc)
-%structName = handles.meshloc;
-%disp(structName);
-%s = struct();
-
-meshName = who;
-
-%if(mesh==0)
-    disp('Checking for mesh');
-%else
-    disp(who);
-%end
-
-
-%structCheck = isfield(handles.cylinder_stnd);
-
-%disp(structCheck);
-%if(structCheck == 1)
-%    set(handles.forward_solver, 'enable','off');
-%end
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% PROBLEM AREA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 % --- Executes on button press in file_pb.
 function file_pb_Callback(hObject, eventdata, handles)
@@ -140,7 +130,7 @@ function viewSolution_pb_Callback(hObject, eventdata, handles)
 % hObject    handle to viewSolution_pb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+gui_view_solution();
 
 % --- Executes on button press in help_pb.
 function help_pb_Callback(hObject, eventdata, handles)
@@ -148,6 +138,7 @@ function help_pb_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+web 'http://code.google.com/p/nirfast/' -browser
 
 % --- Executes on button press in file_new.
 function file_new_Callback(hObject, eventdata, handles)
@@ -155,6 +146,10 @@ function file_new_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+%NEED TO ACCESS NIRFAST FROM THIS FUNCTION
+%set(handles.script,'String','');
+%guidata(hObject, handles);
+%-----------------------------------------
 
 % --- Executes on button press in file_open.
 function file_open_Callback(hObject, eventdata, handles)
@@ -162,6 +157,14 @@ function file_open_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+[fn,pn] = myuigetfile('*.m','Load Script');
+if fn == 0
+    return;
+end
+content = importdata([pn fn]);
+%nirfast;
+%set(handles.script, 'String', content);
+guidata(hObject, handles);
 
 % --- Executes on button press in file_save.
 function file_save_Callback(hObject, eventdata, handles)
@@ -169,6 +172,19 @@ function file_save_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+%content = get(handles.script,'String');
+[fn,pn] = myuiputfile('*.m','Save Script');
+if fn == 0
+    return;
+end
+fid = fopen([pn fn],'w');
+if (ischar(content)~=0)
+    content = cellstr(content);
+end
+for i=1:1:numel(content)
+    fprintf(fid,'%s\n',content{i});
+end
+fclose(fid);
 
 % --- Executes on button press in load_mesh.
 function load_mesh_Callback(hObject, eventdata, handles)
@@ -206,13 +222,14 @@ function load_data_Callback(hObject, eventdata, handles)
 % hObject    handle to load_data (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+gui_load_data();
 
 % --- Executes on button press in view_data.
 function view_data_Callback(hObject, eventdata, handles)
 % hObject    handle to view_data (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+gui_view_data();
 
 
 % --- Executes on button press in save_data.
@@ -221,8 +238,7 @@ function save_data_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    
-
+gui_save_data();    
 
 % --- Executes during object creation, after setting all properties.
 function forward_solver_CreateFcn(hObject, eventdata, handles)
@@ -232,3 +248,41 @@ function forward_solver_CreateFcn(hObject, eventdata, handles)
 
 
 %%%%%%%%%USE CODE FOR CHECKING WORKSPACE VARIABLESS%%%%%%%%%%%%%%%%%%%%
+
+
+% --- Executes on button press in mesh_info_pb.
+function mesh_info_pb_Callback(hObject, eventdata, handles)
+% hObject    handle to mesh_info_pb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+%from menu_new for setting pushbuttons to enable off
+vars = evalin('base','whos;');
+varnames = {};
+[numVar,junk] = size(vars);
+nflag = 1;
+for i=1:1:numVar
+    flag = evalin('base',strcat('isfield(',vars(i).name,',''type'')'));
+    if flag
+        varnames{nflag} = vars(i).name;
+        nflag = nflag + 1;
+    end
+end
+
+%from gui_load_mesh
+mainGUIhandle = nirfast;
+mainGUIdata  = guidata(mainGUIhandle);
+content = get(mainGUIdata.script,'String');
+batch = get(mainGUIdata.batch_mode,'Value');
+
+%for loop to continue until the array of workspace variables is over
+for i = 1:length(varnames)
+    
+meshloc = varnames{i};
+content{end+1} = strcat(mygenvarname(meshloc),' = load_mesh(''',meshloc,''');');
+if ~batch
+    evalin('base',content{end});
+end
+
+set(mainGUIdata.script, 'String', content);
+end;

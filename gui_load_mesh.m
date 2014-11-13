@@ -115,10 +115,9 @@ if ~batch
 end
 
 set(mainGUIdata.script, 'String', content);
-guidata(nirfast, mainGUIdata);
+guidata(menu_new, mainGUIdata);
 close(gui_load_mesh);
-
-
+nirfast;
 
 % --- Executes on button press in browse_mesh.
 function browse_mesh_Callback(hObject, eventdata, handles)
