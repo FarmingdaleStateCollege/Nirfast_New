@@ -1,35 +1,35 @@
-function varargout = reconstructcorrectmenu(varargin)
-% RECONSTRUCTCORRECTMENU MATLAB code for reconstructcorrectmenu.fig
-%      RECONSTRUCTCORRECTMENU, by itself, creates a new RECONSTRUCTCORRECTMENU or raises the existing
+function varargout = reconstruct2(varargin)
+% RECONSTRUCT2 MATLAB code for reconstruct2.fig
+%      RECONSTRUCT2, by itself, creates a new RECONSTRUCT2 or raises the existing
 %      singleton*.
 %
-%      H = RECONSTRUCTCORRECTMENU returns the handle to a new RECONSTRUCTCORRECTMENU or the handle to
+%      H = RECONSTRUCT2 returns the handle to a new RECONSTRUCT2 or the handle to
 %      the existing singleton*.
 %
-%      RECONSTRUCTCORRECTMENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in RECONSTRUCTCORRECTMENU.M with the given input arguments.
+%      RECONSTRUCT2('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in RECONSTRUCT2.M with the given input arguments.
 %
-%      RECONSTRUCTCORRECTMENU('Property','Value',...) creates a new RECONSTRUCTCORRECTMENU or raises the
+%      RECONSTRUCT2('Property','Value',...) creates a new RECONSTRUCT2 or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before reconstructcorrectmenu_OpeningFcn gets called.  An
+%      applied to the GUI before reconstruct2_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to reconstructcorrectmenu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to reconstruct2_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help reconstructcorrectmenu
+% Edit the above text to modify the response to help reconstruct2
 
-% Last Modified by GUIDE v2.5 08-Dec-2014 21:40:30
+% Last Modified by GUIDE v2.5 13-Nov-2014 11:42:41
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @reconstructcorrectmenu_OpeningFcn, ...
-                   'gui_OutputFcn',  @reconstructcorrectmenu_OutputFcn, ...
+                   'gui_OpeningFcn', @reconstruct2_OpeningFcn, ...
+                   'gui_OutputFcn',  @reconstruct2_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,26 +44,26 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before reconstructcorrectmenu is made visible.
-function reconstructcorrectmenu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before reconstruct2 is made visible.
+function reconstruct2_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to reconstructcorrectmenu (see VARARGIN)
+% varargin   command line arguments to reconstruct2 (see VARARGIN)
 
-% Choose default command line output for reconstructcorrectmenu
+% Choose default command line output for reconstruct2
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes reconstructcorrectmenu wait for user response (see UIRESUME)
+% UIWAIT makes reconstruct2 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = reconstructcorrectmenu_OutputFcn(hObject, eventdata, handles) 
+function varargout = reconstruct2_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -72,7 +72,7 @@ function varargout = reconstructcorrectmenu_OutputFcn(hObject, eventdata, handle
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-% --- Executes on button press in radiobutton1.
+
 function radiobutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -92,23 +92,39 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+hObject = reconstructcorrectmenu
+delete (reconstruct2)
 
-delete (reconstructcorrectmenu)
+
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-radiobutton1value = get (handles.radiobutton1 , 'Value');
+radiobutton1value = get  (handles.radiobutton1 , 'Value');
 if (radiobutton1value == 1)
-    close (reconstructcorrectmenu)
-    hObject = reconstruct2
+    gui_reconstruct('type','stnd');
+
 end
 
 radiobutton2value = get (handles.radiobutton2 , 'Value');
-if (radiobutton2value == 1)
-    hObject = reconstruct3
-    delete (reconstructcorrectmenu)
+if (radiobutton2value ==1)
+    gui_reconstruct('type','stnd_bem');
+end
+radiobutton3value = get (handles.radiobutton3 , 'Value');
+if (radiobutton3value ==1)
+    gui_reconstruct('type','stnd_spn');
+end
+radiobutton4value = get (handles.radiobutton4 , 'Value');
+if (radiobutton4value ==1)
+    gui_reconstruct('type','spec_bem');
+end
+radiobutton5value = get (handles.radiobutton5 , 'Value');
+if (radiobutton5value ==1)
+gui_reconstruct('type','fluor');
+end
+radiobutton6value = get (handles.radiobutton6 , 'Value');
+if (radiobutton6value ==1)
+    gui_reconstruct_multispectral();
 end
