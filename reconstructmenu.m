@@ -128,5 +128,5 @@ function pushbutton8_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-hObject = reconstructcorrectmenu
+hObject = choosemenu
 close (reconstructmenu)

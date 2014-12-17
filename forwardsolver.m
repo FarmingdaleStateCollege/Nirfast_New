@@ -22,7 +22,7 @@ function varargout = forwardsolver(varargin)
 
 % Edit the above text to modify the response to help forwardsolver
 
-% Last Modified by GUIDE v2.5 14-Dec-2014 22:38:14
+% Last Modified by GUIDE v2.5 16-Dec-2014 15:36:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -131,7 +131,5 @@ function pushbutton8_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-hObject = test
+hObject = welcome
 close (forwardsolver)
-
-
